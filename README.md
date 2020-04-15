@@ -6,3 +6,9 @@ time the NPC moves. The timer is useful while pickpocketing an NPC trapped in a 
 move for 300 seconds, the NPC will disappear and respawn elsewhere. When the timer approaches 15-30 seconds, give the
 NPC room to move and reset their timer. Be careful not to wait until too close to 0 seconds remaining, or the NPC may
 not willingly wander in time before respawning.
+
+![Multi Timer Example](https://imgur.com/a/OXnD7rf)
+
+Sample Config:
+
+![Multi Timer Config Example](https://imgur.com/a/S9jh8fN)
