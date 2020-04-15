@@ -7,8 +7,8 @@ move for 300 seconds, the NPC will disappear and respawn elsewhere. When the tim
 NPC room to move and reset their timer. Be careful not to wait until too close to 0 seconds remaining, or the NPC may
 not willingly wander in time before respawning.
 
-![Multi Timer Example](https://imgur.com/a/OXnD7rf.jpg)
+![Multi Timer Example](https://i.imgur.com/yM3KoHB.png)
 
 Sample Config:
 
-![Multi Timer Config Example](https://imgur.com/a/S9jh8fN.jpg)
+![Multi Timer Config Example](https://i.imgur.com/JtAtihS.png)
