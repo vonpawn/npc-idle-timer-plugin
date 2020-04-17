@@ -9,6 +9,10 @@ not willingly wander in time before respawning.
 
 ![Multi Timer Example](https://i.imgur.com/yM3KoHB.png)
 
-Sample Config:
+Sample config:
 
-![Multi Timer Config Example](https://i.imgur.com/JtAtihS.png)
+![Multi Timer Config Example](https://i.imgur.com/ZQTSXbJ.png)
+
+Change color when the timer is low:
+
+![Idle Timer Color Change](https://i.imgur.com/nDKGWVr.png)
