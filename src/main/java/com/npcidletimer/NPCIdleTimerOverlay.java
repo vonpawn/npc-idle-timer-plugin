@@ -45,7 +45,7 @@ public class NPCIdleTimerOverlay extends Overlay
 	{
 		double timeLeft = NPC_IDLE_RESPAWN_TIME - npc.getTimeWithoutMoving();
 		double lowDisplay = config.lowDisplay();
-		double maxDisplay = config.maxDisplay(); // > lowDisplay ? config.maxDisplay() : lowDisplay;
+		double maxDisplay = config.maxDisplay();
 		Color timerColor = config.normalTimerColor();
 
 		if (timeLeft < 0)
