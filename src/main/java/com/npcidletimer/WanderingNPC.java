@@ -24,6 +24,9 @@ public class WanderingNPC
 
 	@Getter
 	@Setter
+	private long trueStoppedMovingTick;
+	@Getter
+	@Setter
 	private long timeWithoutMoving;
 
 	@Getter
@@ -36,6 +39,7 @@ public class WanderingNPC
 		this.npcName = npc.getName();
 		this.npcIndex = npc.getIndex();
 		this.stoppedMovingTick = Instant.now();
+		this.trueStoppedMovingTick = 0;
 		this.timeWithoutMoving = 0;
 		this.currentLocation = npc.getWorldLocation();
 	}

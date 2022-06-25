@@ -43,7 +43,17 @@ public class NPCIdleTimerOverlay extends Overlay
 
 	private void renderTimer(final WanderingNPC npc, final Graphics2D graphics)
 	{
+		if ( config.customTimer())
+		{
+			NPC_IDLE_RESPAWN_TIME = config.customTiming();
+		}
+		else
+		{
+			NPC_IDLE_RESPAWN_TIME = 300;
+		}
+
 		double timeLeft = NPC_IDLE_RESPAWN_TIME - npc.getTimeWithoutMoving();
+
 		double lowDisplay = config.lowDisplay();
 		double maxDisplay = config.maxDisplay();
 		Color timerColor = config.normalTimerColor();
@@ -58,7 +68,22 @@ public class NPCIdleTimerOverlay extends Overlay
 			timerColor = config.lowTimerColor();
 		}
 
-		final String timeLeftString = String.valueOf(format.format(timeLeft));
+		String timeLeftString= String.valueOf(format.format(timeLeft));
+
+		if(config.showTimingType())
+		{
+			if (config.showOverlayTicks())
+			{
+				timeLeftString = timeLeftString + ("T");
+			}
+
+			else
+			{
+				timeLeftString= timeLeftString + ("S");
+			}
+		}
+
+
 
 		final Point canvasPoint = npc.getNpc().getCanvasTextLocation(graphics, timeLeftString, npc.getNpc().getLogicalHeight() + config.timerHeight());
 

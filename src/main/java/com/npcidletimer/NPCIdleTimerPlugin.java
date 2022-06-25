@@ -49,6 +49,9 @@ public class NPCIdleTimerPlugin extends Plugin
 	private Instant lastTickUpdate;
 
 	@Getter(AccessLevel.PACKAGE)
+	private long lastTrueTickUpdate;
+
+	@Getter(AccessLevel.PACKAGE)
 	private final Map<Integer, WanderingNPC> wanderingNPCs = new HashMap<>();
 
 	private List<String> selectedNPCs = new ArrayList<>();
@@ -115,6 +118,7 @@ public class NPCIdleTimerPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		lastTrueTickUpdate = client.getTickCount();
 		lastTickUpdate = Instant.now();
 
 		for (NPC npc : client.getNpcs())
@@ -132,17 +136,34 @@ public class NPCIdleTimerPlugin extends Plugin
 			{
 				continue;
 			}
-
-			if (wnpc.getCurrentLocation().getX() != npc.getWorldLocation().getX() || wnpc.getCurrentLocation().getY() != npc.getWorldLocation().getY())
+			if (config.showOverlayTicks())
 			{
-				wnpc.setCurrentLocation(npc.getWorldLocation());
-				wnpc.setTimeWithoutMoving(0);
-				wnpc.setStoppedMovingTick(Instant.now());
-				wnpc.setNpc(npc);
+				if (wnpc.getCurrentLocation().getX() != npc.getWorldLocation().getX() || wnpc.getCurrentLocation().getY() != npc.getWorldLocation().getY())
+				{
+					long currentTick = client.getTickCount();
+					wnpc.setCurrentLocation(npc.getWorldLocation());
+					wnpc.setTimeWithoutMoving(0);
+					wnpc.setTrueStoppedMovingTick(currentTick);
+					wnpc.setNpc(npc);
+				}
+				else
+				{
+					long currentTick = client.getTickCount();
+					wnpc.setTimeWithoutMoving(lastTrueTickUpdate - wnpc.getTrueStoppedMovingTick());
+				}
 			}
-			else
-			{
-				wnpc.setTimeWithoutMoving(lastTickUpdate.getEpochSecond() - wnpc.getStoppedMovingTick().getEpochSecond());
+			else {
+				if (wnpc.getCurrentLocation().getX() != npc.getWorldLocation().getX() || wnpc.getCurrentLocation().getY() != npc.getWorldLocation().getY())
+				{
+					wnpc.setCurrentLocation(npc.getWorldLocation());
+					wnpc.setTimeWithoutMoving(0);
+					wnpc.setStoppedMovingTick(Instant.now());
+					wnpc.setNpc(npc);
+				}
+				else
+				{
+					wnpc.setTimeWithoutMoving(lastTickUpdate.getEpochSecond() - wnpc.getStoppedMovingTick().getEpochSecond());
+				}
 			}
 		}
 	}
