@@ -80,6 +80,11 @@ public class NPCIdleTimerPlugin extends Plugin
 	@Subscribe
 	public void onNpcSpawned(NpcSpawned npcSpawned)
 	{
+		if (client.isInInstancedRegion())
+		{
+			return;
+		}
+
 		final NPC npc = npcSpawned.getNpc();
 		final String npcName = npc.getName();
 
@@ -94,6 +99,11 @@ public class NPCIdleTimerPlugin extends Plugin
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned npcDespawned)
 	{
+		if (client.isInInstancedRegion())
+		{
+			return;
+		}
+
 		final NPC npc = npcDespawned.getNpc();
 		final String npcName = npc.getName();
 
@@ -118,6 +128,11 @@ public class NPCIdleTimerPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		if (client.isInInstancedRegion())
+		{
+			return;
+		}
+
 		lastTrueTickUpdate = client.getTickCount();
 		lastTickUpdate = Instant.now();
 
