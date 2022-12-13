@@ -47,7 +47,7 @@ public class NPCIdleTimerOverlay extends Overlay
 		if (config.customTimer())
 		{
 			npc_idle_respawn_time = config.customTiming();
-			maxDisplay = config.customTimer();
+			maxDisplay = config.customTiming();
 		}
 
 		double timeLeft = npc_idle_respawn_time - npc.getTimeWithoutMoving();
