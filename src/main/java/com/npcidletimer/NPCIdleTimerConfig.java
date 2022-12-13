@@ -92,9 +92,6 @@ public interface NPCIdleTimerConfig extends Config
 		return 300;
 	}
 
-	@Range(
-			max = 999
-	)
 	@ConfigItem(
 			position = 7,
 			keyName = "lowDisplay",
