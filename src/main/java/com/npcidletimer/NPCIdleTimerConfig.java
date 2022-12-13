@@ -57,7 +57,7 @@ public interface NPCIdleTimerConfig extends Config
 	}
 
 	@Range(
-			max = 999
+			max = 300
 	)
 	@ConfigItem(
 			position = 4,
