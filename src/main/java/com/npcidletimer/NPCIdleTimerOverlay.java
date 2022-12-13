@@ -41,16 +41,14 @@ public class NPCIdleTimerOverlay extends Overlay
 
 	private void renderTimer(final WanderingNPC npc, final Graphics2D graphics)
 	{
-		int npc_idle_respawn_time = 300;
 		double maxDisplay = config.maxDisplay();
 
 		if (config.customTimer())
 		{
-			npc_idle_respawn_time = config.customTiming();
 			maxDisplay = config.customTiming();
 		}
 
-		double timeLeft = npc_idle_respawn_time - npc.getTimeWithoutMoving();
+		double timeLeft = maxDisplay - npc.getTimeWithoutMoving();
 
 		double lowDisplay = config.lowDisplay();
 		Color timerColor = config.normalTimerColor();
