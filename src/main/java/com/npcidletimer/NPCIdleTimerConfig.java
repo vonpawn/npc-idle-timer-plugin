@@ -81,9 +81,6 @@ public interface NPCIdleTimerConfig extends Config
 		return false;
 	}
 
-	@Range(
-			max = 999
-	)
 	@ConfigItem(
 			position = 6,
 			keyName = "customTiming",
