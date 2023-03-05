@@ -70,9 +70,6 @@ public interface NPCIdleTimerConfig extends Config
 		return 300;
 	}
 
-	@Range(
-			max = 300
-	)
 	@ConfigItem(
 			position = 5,
 			keyName = "customTimer",
@@ -83,6 +80,7 @@ public interface NPCIdleTimerConfig extends Config
 	{
 		return false;
 	}
+
 	@ConfigItem(
 			position = 6,
 			keyName = "customTiming",
@@ -94,9 +92,6 @@ public interface NPCIdleTimerConfig extends Config
 		return 300;
 	}
 
-	@Range(
-			max = 300
-	)
 	@ConfigItem(
 			position = 7,
 			keyName = "lowDisplay",
