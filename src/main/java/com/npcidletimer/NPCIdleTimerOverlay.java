@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.inject.Inject;
+import net.runelite.api.Client;
 import net.runelite.api.Point;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
@@ -15,16 +16,18 @@ import net.runelite.client.ui.overlay.OverlayUtil;
 public class NPCIdleTimerOverlay extends Overlay
 {
 
+	private final Client client;
 	private final NPCIdleTimerPlugin plugin;
 	private final NPCIdleTimerConfig config;
 
 	NumberFormat format = new DecimalFormat("#");
 
 	@Inject
-	NPCIdleTimerOverlay(NPCIdleTimerPlugin plugin, NPCIdleTimerConfig config)
+	NPCIdleTimerOverlay(Client client, NPCIdleTimerPlugin plugin, NPCIdleTimerConfig config)
 	{
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
+		this.client = client;
 		this.plugin = plugin;
 		this.config = config;
 	}
@@ -32,6 +35,11 @@ public class NPCIdleTimerOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		if (client.isInInstancedRegion())
+		{
+			return null;
+		}
+
 		if (config.showOverlay())
 		{
 			plugin.getWanderingNPCs().forEach((id, npc) -> renderTimer(npc, graphics));
