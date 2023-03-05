@@ -22,8 +22,6 @@ public class NPCIdleTimerOverlay extends Overlay
 
 	NumberFormat format = new DecimalFormat("#");
 
-	int NPC_IDLE_RESPAWN_TIME = 300;
-
 	@Inject
 	NPCIdleTimerOverlay(Client client, NPCIdleTimerPlugin plugin, NPCIdleTimerConfig config)
 	{
@@ -51,19 +49,16 @@ public class NPCIdleTimerOverlay extends Overlay
 
 	private void renderTimer(final WanderingNPC npc, final Graphics2D graphics)
 	{
-		if ( config.customTimer())
+		double maxDisplay = config.maxDisplay();
+
+		if (config.customTimer())
 		{
-			NPC_IDLE_RESPAWN_TIME = config.customTiming();
-		}
-		else
-		{
-			NPC_IDLE_RESPAWN_TIME = 300;
+			maxDisplay = config.customTiming();
 		}
 
-		double timeLeft = NPC_IDLE_RESPAWN_TIME - npc.getTimeWithoutMoving();
+		double timeLeft = maxDisplay - npc.getTimeWithoutMoving();
 
 		double lowDisplay = config.lowDisplay();
-		double maxDisplay = config.maxDisplay();
 		Color timerColor = config.normalTimerColor();
 
 		if (timeLeft < 0)
@@ -76,15 +71,14 @@ public class NPCIdleTimerOverlay extends Overlay
 			timerColor = config.lowTimerColor();
 		}
 
-		String timeLeftString= String.valueOf(format.format(timeLeft));
+		String timeLeftString = String.valueOf(format.format(timeLeft));
 
-		if(config.showTimingType())
+		if (config.showTimingType())
 		{
 			if (config.showOverlayTicks())
 			{
 				timeLeftString = timeLeftString + ("T");
 			}
-
 			else
 			{
 				timeLeftString= timeLeftString + ("S");
